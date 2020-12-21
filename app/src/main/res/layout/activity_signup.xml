@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Signup">
+
+    <androidx.cardview.widget.CardView
+        android:elevation="8dp"
+        android:layout_margin="8dp"
+        app:cardCornerRadius="8dp"
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <LinearLayout
+            android:orientation="vertical"
+            android:padding="5dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <EditText
+                android:layout_width="match_parent"
+                android:id="@+id/uname"
+                android:text="user name"
+                android:padding="3dp"
+                android:layout_height="50dp">
+
+            </EditText>
+            <EditText
+                android:layout_width="match_parent"
+                android:id="@+id/email"
+
+                android:padding="3dp"
+                android:layout_height="50dp">
+
+            </EditText>
+            <EditText
+                android:layout_width="match_parent"
+                android:id="@+id/pass"
+
+                android:padding="3dp"
+                android:layout_height="50dp">
+
+            </EditText>
+            <EditText
+                android:layout_width="match_parent"
+                android:id="@+id/cpass"
+                android:text="confirt pass"
+                android:padding="3dp"
+                android:layout_height="50dp">
+
+            </EditText>
+            <EditText
+                android:layout_width="match_parent"
+                android:id="@+id/num"
+                android:padding="3dp"
+                android:layout_height="50dp">
+
+            </EditText>
+
+            <Button
+                android:layout_width="100dp"
+                android:text="Login"
+                android:id="@+id/login"
+                android:layout_gravity="center"
+                android:layout_height="50dp">
+
+            </Button>
+
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
+
+
+
+</LinearLayout>

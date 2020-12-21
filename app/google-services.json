@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "57687953835",
+    "project_id": "log-in-b20f3",
+    "storage_bucket": "log-in-b20f3.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:57687953835:android:55d0787632ac312c0e82ee",
+        "android_client_info": {
+          "package_name": "com.engalshikh.loginwithfirebase"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "57687953835-5i1su1p7sbjjgrto356dv0a4vho7l1a5.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC2R3VIHSEiXlZhvpdxcAqRldAG2GyP7go"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "57687953835-5i1su1p7sbjjgrto356dv0a4vho7l1a5.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
