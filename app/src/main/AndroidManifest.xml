@@ -13,21 +13,22 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.LoginWithFirebase">
         <activity android:name=".MainActivity2">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity android:name=".FireStoreActivity">
+
+        </activity>
+        <activity android:name=".LoginActivity" >
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".LoginActivity" />
-        <activity android:name=".Signup" />
+        <activity android:name=".Signup" >
+
+        </activity>
         <activity android:name=".phoneN"></activity>
         <activity android:name=".MainActivity" />
     </application>

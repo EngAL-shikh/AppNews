@@ -11,15 +11,13 @@ import com.firebase.ui.firestore.FirestoreRecyclerOptions
 
 
 class AdpterNews(options: FirestoreRecyclerOptions<News>?) :
-    FirestoreRecyclerAdapter<News, AdpterNews.AdpterNewsVH>(options){
-
-
+    FirestoreRecyclerAdapter<News, AdpterNews.AdpterNewsVH>(options as FirestoreRecyclerOptions<News>){
 
     override fun onCreateViewHolder(p0: ViewGroup, p1: Int): AdpterNewsVH {
         return  AdpterNewsVH(LayoutInflater.from(p0.context).inflate(R.layout.news_list,p0,false))
     }
 
-    override fun onBindViewHolder(holder: AdpterNewsVH?, p1: Int, news: News?) {
+    override fun onBindViewHolder(holder: AdpterNewsVH, p1: Int, news: News) {
 
         holder?.title?.text=news?.title
         holder?.det?.text=news?.det
@@ -32,5 +30,8 @@ class AdpterNews(options: FirestoreRecyclerOptions<News>?) :
         var det= itemView.findViewById(R.id.det) as TextView
         var image= itemView.findViewById(R.id.image) as TextView
     }
+
+
+
 
 }

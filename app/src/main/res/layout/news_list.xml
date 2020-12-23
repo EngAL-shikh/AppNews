@@ -1,52 +1,89 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
-
+    android:layout_height="wrap_content"
+    android:background="#CFCACA"
+    android:orientation="vertical"
+>
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
-        android:layout_height="150dp"
+        android:layout_height="wrap_content"
         android:elevation="8dp"
-        android:layout_margin="5dp"
-
+        android:layout_margin="8dp"
+        app:cardCornerRadius="8dp"
         >
-
         <LinearLayout
-            android:layout_width="294dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:orientation="vertical"
-            android:padding="5dp">
+            android:padding="10dp"
+            android:orientation="vertical">
 
-            <TextView
-                android:id="@+id/title"
+            <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:hint="title"></TextView>
+                android:layout_height="150dp"
+                app:cardCornerRadius="8dp"
+
+                app:cardPreventCornerOverlap="false"
+                app:cardUseCompatPadding="false">
+
+
+                <ImageView
+
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/login" />
+
+            </androidx.cardview.widget.CardView>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Politics"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+                    android:textColor="@color/grey_40" />
+                <TextView
+                    android:id="@+id/image"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Politics"
+                    android:visibility="gone"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+                    android:textColor="@color/grey_40" />
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_weight="1" />
+
+
+
+            </LinearLayout>
 
             <TextView
                 android:id="@+id/det"
                 android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:hint="detiles"
-                ></TextView>
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="string/short_lorem_ipsum"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                android:textColor="@color/grey_80"
+                app:fontFamily="sans-serif-medium" />
 
-            <TextView
-                android:id="@+id/image"
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:hint="image"
-
-                ></TextView><![CDATA[
-
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="horizontal">
-
-
-
-        ]]>
         </LinearLayout>
     </androidx.cardview.widget.CardView>
+
+
+
 
 </LinearLayout>

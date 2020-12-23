@@ -62,9 +62,7 @@ class NewsFragment : Fragment() {
         save=view.findViewById(R.id.save)as Button
         rec=view.findViewById(R.id.rec)as RecyclerView
         rec = view.findViewById(R.id.rec)
-
-       // rec.layoutManager = LinearLayoutManager(context)
-        save.setOnClickListener {
+           save.setOnClickListener {
 
             addToFireStore()
 
@@ -88,54 +86,10 @@ class NewsFragment : Fragment() {
 
     }
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-       // redFromFireStore()
+
         recNews()
     }
-//
-//    private fun updateUI(newsList: List<News>) {
-//
-//        adapter = NewsAdapter(newsList)
-//        rec.adapter = adapter
-//        Toast.makeText(requireContext(),newsList[0].title,Toast.LENGTH_LONG).show()
-//    }
-//
-//    private class NewsHolder(itemView: View) : RecyclerView.ViewHolder(itemView),
-//        View.OnClickListener {
-//        private val title = itemView.findViewById(R.id.title) as TextView
-//        private val det = itemView.findViewById(R.id.det) as TextView
-//        private val image = itemView.findViewById(R.id.image) as TextView
-//
-//        init {
-//            itemView.setOnClickListener(this)
-//        }
-//
-//        fun bind(news: News) {
-//            title.text = news.title;
-//            det.text = news.det;
-//            image.text = news.image
-//        }
-//
-//        override fun onClick(p0: View?) {}
-//    }
-//    private class NewsAdapter(private val newsList: List<News>) :
-//        RecyclerView.Adapter<NewsHolder>() {
-//        override fun onCreateViewHolder(
-//            parent: ViewGroup,
-//            viewType: Int
-//        ): NewsHolder {
-//            val view =
-//                LayoutInflater.from(parent.context).inflate(R.layout.news_list, parent, false)
-//            return NewsHolder(view)
-//        }
-//
-//        override fun getItemCount(): Int = newsList.size
-//
-//        override fun onBindViewHolder(holder: NewsHolder, position: Int) {
-//            val news = newsList[position]
-//            holder.bind(news)
-//        }
-//
-//    }
+
 
     fun addToFireStore(){
 
@@ -211,22 +165,5 @@ class NewsFragment : Fragment() {
             }
         }
 
-//            for (decoument in it.result!!){
-//                Log.d("data",decoument.data.getValue("title").toString())
-//                var title=decoument.data.getValue("title").toString()
-//                var det=decoument.data.getValue("det").toString()
-//                var image=decoument.data.getValue("image").toString()
-//                var news=News()
-//
-//
-//
-//
-//
-//
-//              news.title=decoument.data.get("title").toString()
-//              news.title=decoument.data.getValue("det").toString()
-//              news.title=decoument.data.getValue("image").toString()
-//
-//            }
     }
 }

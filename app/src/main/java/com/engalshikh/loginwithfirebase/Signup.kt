@@ -7,9 +7,13 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.CalendarContract
 import android.util.Log
+import android.view.View
 import android.widget.Button
 import android.widget.EditText
+import android.widget.TextView
 import android.widget.Toast
+import androidx.cardview.widget.CardView
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.firebase.FirebaseException
 import com.google.firebase.FirebaseTooManyRequestsException
 import com.google.firebase.auth.*
@@ -19,9 +23,21 @@ import kotlin.coroutines.coroutineContext
 
 private lateinit var email: EditText
 private lateinit var pass: EditText
-private lateinit var login: Button
+private lateinit var cpass: EditText
+private lateinit var signup: FloatingActionButton
+private lateinit var verfy: FloatingActionButton
 private lateinit var number: EditText
 private lateinit var uname: EditText
+private lateinit var usephone: TextView
+private lateinit var cardemail: CardView
+private lateinit var cardphone: CardView
+private lateinit var useemail: TextView
+private lateinit var Ed_verify: EditText
+private lateinit var BackToLogin: TextView
+private var storedVerificationId: String? = ""
+private lateinit var resendToken: PhoneAuthProvider.ForceResendingToken
+private lateinit var callbacks: PhoneAuthProvider.OnVerificationStateChangedCallbacks
+lateinit var auth : FirebaseAuth
 class Signup : AppCompatActivity() {
     var auth = FirebaseAuth.getInstance()
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -30,30 +46,125 @@ class Signup : AppCompatActivity() {
 
         email = findViewById(R.id.email)
         pass = findViewById(R.id.pass)
-        login = findViewById(R.id.login)
+        cpass = findViewById(R.id.cpass)
+        signup = findViewById(R.id.signup)
         number = findViewById(R.id.num)
         uname = findViewById(R.id.uname)
+        Ed_verify = findViewById(R.id.Ed_verify)
+        usephone=findViewById(R.id.userpnenumber)
+        useemail=findViewById(R.id.useemail)
+        cardemail=findViewById(R.id.card_sign_email)
+        cardphone=findViewById(R.id.card_sign_phone)
+        verfy=findViewById(R.id.bt_verify)
+        BackToLogin=findViewById(R.id.backToLogin)
 
-        login.setOnClickListener {
+
+        BackToLogin.setOnClickListener {
+            var i=Intent(this,LoginActivity::class.java)
+            startActivity(i)
+        }
+        auth=FirebaseAuth.getInstance()
+        var currentUser = auth.currentUser
+        if(currentUser != null) {
+            startActivity(Intent(applicationContext, MainActivity2::class.java))
+            finish()
+        }
+
+        ///////////////verify
+        verfy.setOnClickListener{
+            var otp=Ed_verify.text.toString().trim()
+            if(!otp.isEmpty()){
+                val credential : PhoneAuthCredential = PhoneAuthProvider.getCredential(
+                    storedVerificationId.toString(), otp)
+                signInWithPhoneAuthCredential(credential)
+            }else{
+                Toast.makeText(this,"Enter OTP",Toast.LENGTH_SHORT).show()
+            }
+
+            signup.visibility=View.VISIBLE
+            verfy.visibility=View.GONE
+            Ed_verify.visibility=View.GONE
+            Ed_verify.setText("")
+        }
 
 
-            if(uname.text.toString().trim().length<3){
-                Toast.makeText(this,"يجب ادخال الاسم ",Toast.LENGTH_SHORT).show()
+        usephone.setOnClickListener {
+            siginUpCheak("phone")
+        }
+        useemail.setOnClickListener {
+            siginUpCheak("email")
+        }
 
 
-            }else if(pass.text.toString().trim().length<6){
-                Toast.makeText(this,"كلمة المرور ضعيفة  ",Toast.LENGTH_SHORT).show()
+
+// Regstertion
+        signup.setOnClickListener {
+
+            if (number.text.toString()==""){
+                if(uname.text.toString().trim().length<3){
+                    Toast.makeText(this,"يجب ادخال الاسم ",Toast.LENGTH_SHORT).show()
+
+
+                }else if(pass.text.toString().trim().length<6){
+                    Toast.makeText(this,"كلمة المرور ضعيفة  ",Toast.LENGTH_SHORT).show()
+
+                }else if(email.text.toString().trim().length <3){
+
+
+                }else if (pass.text.toString()!=cpass.text.toString()){
+
+                    Toast.makeText(this,"كلمة المرور غير متطابقة  ",Toast.LENGTH_SHORT).show()
+
+                }else{
+
+                    emailAuth()
+                }
 
             }else{
-                emailAuth()
 
+                login()
+                signup.visibility=View.GONE
+                verfy.visibility=View.VISIBLE
+                Ed_verify.visibility=View.VISIBLE
             }
 
 
-            // custom()
+
+
 
 
         }
+
+
+        // Callback function for Phone Auth
+        callbacks = object : PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
+
+            override fun onVerificationCompleted(credential: PhoneAuthCredential) {
+                startActivity(Intent(applicationContext, MainActivity::class.java))
+                finish()
+            }
+
+            override fun onVerificationFailed(e: FirebaseException) {
+                Toast.makeText(applicationContext, "Failed", Toast.LENGTH_LONG).show()
+            }
+
+            override fun onCodeSent(
+                verificationId: String,
+                token: PhoneAuthProvider.ForceResendingToken
+            ) {
+
+                Log.d("TAG","onCodeSent:$verificationId")
+                storedVerificationId = verificationId
+                resendToken = token
+                Toast.makeText(this@Signup,"done",Toast.LENGTH_LONG).show()
+                // var intent = Intent(applicationContext,Verify::class.java)
+                //intent.putExtra("storedVerificationId",storedVerificationId)
+                // startActivity(intent)
+            }
+        }
+
+
+
     }
 
 
@@ -84,24 +195,77 @@ class Signup : AppCompatActivity() {
             }
     }
 
-    fun custom(){
-        var email=email.text.toString()
-        var pass= pass.text.toString()
-        email?.let {
-            auth.signInWithCustomToken(email)
-                .addOnCompleteListener() { task ->
-                    if (task.isSuccessful) {
-                        // Sign in success, update UI with the signed-in user's information
-                        Log.d("TAG", "signInWithCustomToken:success")
-                        val user = auth.currentUser
-
-                    } else {
-                        // If sign in fails, display a message to the user.
-                        Log.w("TAG", "signInWithCustomToken:failure", task.exception)
 
 
-                    }
-                }
+
+    //phon auth
+
+
+    private fun login() {
+        val mobileNumber=findViewById<EditText>(R.id.num)
+        var number=mobileNumber.text.toString().trim()
+
+        if(!number.isEmpty()){
+            number="+967"+number
+            sendVerificationcode (number)
+        }else{
+            Toast.makeText(this,"Enter mobile number",Toast.LENGTH_SHORT).show()
         }
     }
+    private fun sendVerificationcode(number: String) {
+        val options = PhoneAuthOptions.newBuilder(auth)
+            .setPhoneNumber(number) // Phone number to verify
+            .setTimeout(60L, TimeUnit.SECONDS) // Timeout and unit
+            .setActivity(this) // Activity (for callback binding)
+            .setCallbacks(callbacks) // OnVerificationStateChangedCallbacks
+            .build()
+        PhoneAuthProvider.verifyPhoneNumber(options)
+    }
+
+
+
+
+    //Verify
+    private fun signInWithPhoneAuthCredential(credential: PhoneAuthCredential) {
+        auth.signInWithCredential(credential)
+            .addOnCompleteListener(this) { task ->
+                if (task.isSuccessful) {
+                    startActivity(Intent(this, MainActivity2::class.java))
+                    finish()
+// ...
+                } else {
+// Sign in failed, display a message and update the UI
+                    if (task.exception is FirebaseAuthInvalidCredentialsException) {
+// The verification code entered was invalid
+                        Toast.makeText(this,"Invalid OTP",Toast.LENGTH_SHORT).show()
+                    }
+                }
+            }
+    }
+
+
+
+
+
+    fun siginUpCheak(type:String){
+
+        if (type=="email"){
+            cardphone.visibility= View.GONE
+            cardemail.visibility= View.VISIBLE
+            usephone.visibility=View.VISIBLE
+            useemail.visibility=View.GONE
+            number.setText("")
+
+        }else{
+
+            cardphone.visibility= View.VISIBLE
+            cardemail.visibility= View.GONE
+            usephone.visibility=View.GONE
+            useemail.visibility=View.VISIBLE
+
+        }
+
+
+    }
+
 }
