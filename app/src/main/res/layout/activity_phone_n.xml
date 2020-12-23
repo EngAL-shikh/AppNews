@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".PhoneN">
+    tools:context=".phoneN">
     <LinearLayout
         android:layout_width="378dp"
         android:layout_height="46dp"
@@ -32,7 +32,7 @@
 
 
             android:hint="قم بأدخال رقم الهاتف"
-            android:inputType="number|numberDecimal"
+
 
             tools:layout_editor_absoluteX="16dp"
             tools:layout_editor_absoluteY="235dp" />

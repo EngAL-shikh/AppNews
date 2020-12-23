@@ -25,10 +25,17 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-         var sign:Button=findViewById(R.id.signup)
 
-        sign.setOnClickListener {
+
+         var tosignup:Button=findViewById(R.id.tosignup)
+         var tologin:Button=findViewById(R.id.tologin)
+
+        tosignup.setOnClickListener {
             var i=Intent(this, Signup::class.java)
+            startActivity(i)
+        }
+        tologin.setOnClickListener {
+            var i=Intent(this, LoginActivity::class.java)
             startActivity(i)
         }
 

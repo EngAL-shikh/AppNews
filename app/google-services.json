@@ -14,6 +14,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "57687953835-chth12vu7pq58n6eo1uuqge9u6lblr0i.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.engalshikh.loginwithfirebase",
+            "certificate_hash": "3139133b07d7215e5433b83ce18e9b2ee9262330"
+          }
+        },
+        {
           "client_id": "57687953835-5i1su1p7sbjjgrto356dv0a4vho7l1a5.apps.googleusercontent.com",
           "client_type": 3
         }
