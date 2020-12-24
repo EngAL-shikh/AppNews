@@ -25,7 +25,7 @@ class MainActivity2 : AppCompatActivity(), NavigationView.OnNavigationItemSelect
         setContentView(R.layout.activity_main2)
 
 
-
+        sendcontact("")
 
         toolbar = findViewById(R.id.toolbar)
         setSupportActionBar(toolbar)
@@ -49,6 +49,7 @@ class MainActivity2 : AppCompatActivity(), NavigationView.OnNavigationItemSelect
     }
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
+
         when (item.itemId) {
             R.id.nav_news -> {
 
@@ -57,11 +58,15 @@ class MainActivity2 : AppCompatActivity(), NavigationView.OnNavigationItemSelect
 
 
             }
-            R.id.nav_logout-> {
+            R.id.nav_sport-> {
 
-                sendcontact("log out")
+                sendcontact("sport")
 
             }
+            R.id.nav_logout-> {
+
+                sendcontact("logout")
+            }else-> sendcontact("News")
 
         }
         drawerLayout.closeDrawer(GravityCompat.START)
@@ -75,6 +80,7 @@ class MainActivity2 : AppCompatActivity(), NavigationView.OnNavigationItemSelect
             .beginTransaction()
             .replace(R.id.container, NewsFragment.newInstance(data))
             .commit()
+
 
 
     }

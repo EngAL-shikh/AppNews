@@ -37,6 +37,7 @@ private lateinit var BackToLogin: TextView
 private var storedVerificationId: String? = ""
 private lateinit var resendToken: PhoneAuthProvider.ForceResendingToken
 private lateinit var callbacks: PhoneAuthProvider.OnVerificationStateChangedCallbacks
+private val emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+"
 lateinit var auth : FirebaseAuth
 class Signup : AppCompatActivity() {
     var auth = FirebaseAuth.getInstance()
@@ -74,8 +75,7 @@ class Signup : AppCompatActivity() {
         verfy.setOnClickListener{
             var otp=Ed_verify.text.toString().trim()
             if(!otp.isEmpty()){
-                val credential : PhoneAuthCredential = PhoneAuthProvider.getCredential(
-                    storedVerificationId.toString(), otp)
+                val credential : PhoneAuthCredential = PhoneAuthProvider.getCredential(storedVerificationId.toString(), otp)
                 signInWithPhoneAuthCredential(credential)
             }else{
                 Toast.makeText(this,"Enter OTP",Toast.LENGTH_SHORT).show()
@@ -100,20 +100,20 @@ class Signup : AppCompatActivity() {
 // Regstertion
         signup.setOnClickListener {
 
-            if (number.text.toString()==""){
+            if (Ed_verify.text.toString()==""){
                 if(uname.text.toString().trim().length<3){
-                    Toast.makeText(this,"يجب ادخال الاسم ",Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this,"Name is Empty ",Toast.LENGTH_SHORT).show()
 
 
                 }else if(pass.text.toString().trim().length<6){
-                    Toast.makeText(this,"كلمة المرور ضعيفة  ",Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this,"Low password  ",Toast.LENGTH_SHORT).show()
 
-                }else if(email.text.toString().trim().length <3){
+                }else if(!email.text.trim().matches(emailPattern.toRegex())){
 
-
+                    Toast.makeText(this,"Invlide email adriss",Toast.LENGTH_SHORT).show()
                 }else if (pass.text.toString()!=cpass.text.toString()){
 
-                    Toast.makeText(this,"كلمة المرور غير متطابقة  ",Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this,"The password not the same ",Toast.LENGTH_SHORT).show()
 
                 }else{
 
@@ -181,7 +181,7 @@ class Signup : AppCompatActivity() {
 
                     Log.d("tes", "createUserWithEmail:success")
                     val user = auth.currentUser
-                    var i=Intent(this, phoneN::class.java)
+                    var i=Intent(this, MainActivity2::class.java)
                     startActivity(i)
 
                 } else {

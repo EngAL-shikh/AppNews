@@ -1,33 +1,41 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="200dp"
-    android:background="#4CAF50"
-    android:orientation="vertical"
+    android:background="@drawable/shape"
+
     android:gravity="bottom"
+    android:orientation="vertical"
     android:paddingLeft="15dp"
     android:paddingBottom="15dp">
 
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:srcCompat="@mipmap/ic_launcher"
-        android:id="@+id/imageView"
-        android:layout_marginBottom="15dp"/>
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/profile_image"
+        android:layout_width="96dp"
+        android:layout_gravity="center"
+        android:layout_height="96dp"
+        android:src="@drawable/user"
+        app:civ_border_width="2dp"
+        app:civ_border_color="#F8F8F6"/>
+
+
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Title"
+        android:text="Omar alshikh"
+        android:gravity="center"
         android:textColor="#FFFFFF"
-        android:textStyle="bold"/>
+        android:textStyle="bold" />
 
     <TextView
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="This is our navigation drawer"
-        android:textColor="#FFFFFF"/>
+        android:gravity="center"
+        android:text="Android Div | Ui/Ux Designer"
+        android:textColor="#FFFFFF" />
 
 </LinearLayout>
