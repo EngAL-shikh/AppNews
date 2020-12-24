@@ -7,6 +7,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ArrayAdapter
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
@@ -35,6 +36,7 @@ class NewsFragment : Fragment() {
     lateinit var rec: RecyclerView
     lateinit var add: FloatingActionButton
     lateinit var card_add: CardView
+    lateinit var arrayAdapter:ArrayAdapter<String>
     //private lateinit var adapter: NewsAdapter
 
     companion object{
@@ -75,8 +77,26 @@ class NewsFragment : Fragment() {
 
         }
            save.setOnClickListener {
+                   if (title.text.toString().trim().length<3){
+                   Toast.makeText(context,"Enter the title", Toast.LENGTH_LONG).show()
+               }else if(det.text.toString().trim().length<12){
+                   Toast.makeText(context,"the deatils is very short", Toast.LENGTH_LONG).show()
 
-               addToNews("News")
+               }else{
+                       if (contact=="News"){
+                           addToNews("News")
+
+                       }else if (contact=="sport"){
+
+                           addToNews("SportNews")
+                       }else{
+                           addToNews("News")
+
+                       }
+
+               }
+
+
                title.setText("")
                det.setText("")
                image.setText("")
@@ -97,6 +117,16 @@ class NewsFragment : Fragment() {
 
     }
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+
+
+        var cats=ArrayList<String>()
+
+        cats.add("الكترونيات")
+        cats.add("مستندات")
+        cats.add("اشخاص")
+        cats.add("حيوانات")
+
+
         if (contact=="logout"){
 
             var auth = FirebaseAuth.getInstance()
@@ -108,9 +138,11 @@ class NewsFragment : Fragment() {
         }else if(contact=="sport"){
             feachSportNews()
 
-        }else{
-            image.setBackgroundResource(R.drawable.nn)
-        feachNews()}
+        }else if(contact=="News"){
+
+        feachNews()
+
+        }
     }
 
 
@@ -124,8 +156,9 @@ class NewsFragment : Fragment() {
 
 
 
+
         var news=News(title.text.toString(),det.text.toString(),image.text.toString())
-        db.collection("News").add(news).addOnCompleteListener{
+        db.collection(typeNews).add(news).addOnCompleteListener{
             if (it.isSuccessful){
                 Toast.makeText(context,"added", Toast.LENGTH_LONG).show()
 
@@ -187,6 +220,15 @@ class NewsFragment : Fragment() {
     override fun onDestroy() {
         super.onDestroy()
         adpterNews!!.stopListening()
+
+    }
+
+    fun getType(){
+
+
+
+
+
 
     }
 //    fun redFromFireStore(){

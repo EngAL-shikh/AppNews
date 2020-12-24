@@ -25,7 +25,7 @@ class MainActivity2 : AppCompatActivity(), NavigationView.OnNavigationItemSelect
         setContentView(R.layout.activity_main2)
 
 
-        sendcontact("")
+        sendcontact("News")
 
         toolbar = findViewById(R.id.toolbar)
         setSupportActionBar(toolbar)
