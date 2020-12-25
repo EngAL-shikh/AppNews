@@ -168,7 +168,7 @@ class NewsFragment : Fragment() {
 
     fun feachNews(){
 
-
+//
         val query: Query =collectionRefrence
         val firestoreRecyclerOptions= FirestoreRecyclerOptions.Builder<News>()
             .setQuery(query,News::class.java)

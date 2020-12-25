@@ -140,8 +140,8 @@ class LoginActivity : AppCompatActivity() {
             }
 
             override fun onVerificationFailed(e: FirebaseException) {
-               // Toast.makeText(applicationContext, "Failed", Toast.LENGTH_LONG).show()
-                Toast.makeText(applicationContext,e.toString(), Toast.LENGTH_LONG).show()
+                Toast.makeText(applicationContext, "Failed", Toast.LENGTH_LONG).show()
+
             }
 
             override fun onCodeSent(
@@ -197,7 +197,7 @@ class LoginActivity : AppCompatActivity() {
         var number=mobileNumber.text.toString().trim()
 
         if(!number.isEmpty()){
-            //number="+967"+number
+            number="+"+number
             sendVerificationcode(number)
         }else{
             Toast.makeText(this, "Enter mobile number", Toast.LENGTH_SHORT).show()

@@ -209,7 +209,7 @@ class Signup : AppCompatActivity() {
         var number=mobileNumber.text.toString().trim()
 
         if(!number.isEmpty()){
-            number="+967"+number
+            number="+"+number
             sendVerificationcode (number)
         }else{
             Toast.makeText(this,"Enter mobile number",Toast.LENGTH_SHORT).show()
