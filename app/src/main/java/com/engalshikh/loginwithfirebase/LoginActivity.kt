@@ -149,7 +149,7 @@ class LoginActivity : AppCompatActivity() {
                     token: PhoneAuthProvider.ForceResendingToken
             ) {
 
-                Log.d("TAG", "onCodeSent:$verificationId")
+                Log.d("code", "onCodeSent:$verificationId")
                 storedVerificationId = verificationId
                 resendToken = token
                 Toast.makeText(this@LoginActivity, "done", Toast.LENGTH_LONG).show()
@@ -197,7 +197,7 @@ class LoginActivity : AppCompatActivity() {
         var number=mobileNumber.text.toString().trim()
 
         if(!number.isEmpty()){
-            number="+967"+number
+            //number="+967"+number
             sendVerificationcode(number)
         }else{
             Toast.makeText(this, "Enter mobile number", Toast.LENGTH_SHORT).show()
