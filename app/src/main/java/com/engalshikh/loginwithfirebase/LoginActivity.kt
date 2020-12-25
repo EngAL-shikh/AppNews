@@ -16,10 +16,10 @@ import com.google.firebase.auth.*
 import java.util.concurrent.TimeUnit
 
 private lateinit var email: EditText
+private lateinit var email4: EditText
 private lateinit var pass: EditText
 private lateinit var login: FloatingActionButton
 private lateinit var number: EditText
-private lateinit var   Ed_verify: EditText
 private lateinit var toSignup: TextView
 private lateinit var card_login_phone: CardView
 private lateinit var card_login_email: CardView
@@ -43,10 +43,11 @@ class LoginActivity : AppCompatActivity() {
             finish()
         }
         email = findViewById(R.id.email)
+        email4 = findViewById(R.id.email)
         pass = findViewById(R.id.pass)
         login = findViewById(R.id.login)
         number = findViewById(R.id.login_phone)
-        Ed_verify = findViewById(R.id.Ed_verify)
+
         toSignup = findViewById(R.id.tosignup)
         card_login_phone = findViewById(R.id.card_login_phon)
         card_login_email = findViewById(R.id.card_login_email)
@@ -71,7 +72,7 @@ class LoginActivity : AppCompatActivity() {
 
 
 
-            if (number.text.toString().trim().length<9&& Ed_verify.text.toString()==""){
+            if (number.text.toString().trim().length<9){
                 Toast.makeText(this, "Invlide Number", Toast.LENGTH_SHORT).show()
                 number.setBackgroundResource(R.drawable.erorrshape)
 
@@ -80,21 +81,11 @@ class LoginActivity : AppCompatActivity() {
             if (number.text.toString()!=""){
                 number.setBackgroundResource(R.color.white)
                 login()
-                Ed_verify.visibility=View.VISIBLE
 
-                number.setText("")
 
             }else{
 
-                var code=Ed_verify.text.toString().trim()
-                if(!code.isEmpty()){
-                    val credential : PhoneAuthCredential = PhoneAuthProvider.getCredential(
-                            storedVerificationId.toString(), code)
-                    signInWithPhoneAuthCredential(credential)
-                }else{
-                    Toast.makeText(this, "Enter Code", Toast.LENGTH_SHORT).show()
 
-                }
         }
         }
 
@@ -109,10 +100,11 @@ class LoginActivity : AppCompatActivity() {
 
             if(!email.matches(emailPattern.toRegex())){
                 Toast.makeText(this, "Invalid email address", Toast.LENGTH_SHORT).show()
-
+                email4.setBackgroundResource(R.drawable.erorrshape)
 
             }else if(pass.text.toString().trim().length<6){
                 Toast.makeText(this, "worng password ", Toast.LENGTH_SHORT).show()
+                pass.setBackgroundResource(R.drawable.erorrshape)
 
             }else{
                 sign()
@@ -153,6 +145,9 @@ class LoginActivity : AppCompatActivity() {
                 storedVerificationId = verificationId
                 resendToken = token
                 Toast.makeText(this@LoginActivity, "done", Toast.LENGTH_LONG).show()
+                var intent = Intent(applicationContext,VerifyActivity::class.java)
+                intent.putExtra("storedVerificationId",storedVerificationId)
+                startActivity(intent)
 
             }
         }

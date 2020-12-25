@@ -32,7 +32,6 @@ private lateinit var usephone: TextView
 private lateinit var cardemail: CardView
 private lateinit var cardphone: CardView
 private lateinit var useemail: TextView
-private lateinit var Ed_verify: EditText
 private lateinit var BackToLogin: TextView
 private var storedVerificationId: String? = ""
 private lateinit var resendToken: PhoneAuthProvider.ForceResendingToken
@@ -51,7 +50,7 @@ class Signup : AppCompatActivity() {
         signup = findViewById(R.id.signup)
         number = findViewById(R.id.num)
         uname = findViewById(R.id.uname)
-        Ed_verify = findViewById(R.id.Ed_verify)
+
         usephone=findViewById(R.id.userpnenumber)
         useemail=findViewById(R.id.useemail)
         cardemail=findViewById(R.id.card_sign_email)
@@ -71,22 +70,7 @@ class Signup : AppCompatActivity() {
             finish()
         }
 
-        ///////////////verify
-        verfy.setOnClickListener{
-            var otp=Ed_verify.text.toString().trim()
-            if(!otp.isEmpty()){
-                val credential : PhoneAuthCredential = PhoneAuthProvider.getCredential(storedVerificationId.toString(), otp)
-                signInWithPhoneAuthCredential(credential)
-            }else{
-                Toast.makeText(this,"Enter OTP",Toast.LENGTH_SHORT).show()
-                Ed_verify.setBackgroundResource(R.drawable.erorrshape)
-            }
 
-            signup.visibility=View.VISIBLE
-            verfy.visibility=View.GONE
-            Ed_verify.visibility=View.GONE
-            Ed_verify.setText("")
-        }
 
 
         usephone.setOnClickListener {
@@ -101,18 +85,18 @@ class Signup : AppCompatActivity() {
 // Regstertion
         signup.setOnClickListener {
 
-            if (Ed_verify.text.toString()==""){
+            if (number.text.toString()==""){
                 if(uname.text.toString().trim().length<3){
-                    Toast.makeText(this,"Name is Empty ",Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this,"Empty ",Toast.LENGTH_SHORT).show()
                     uname.setBackgroundResource(R.drawable.erorrshape)
 
+                }else if(!email.text.trim().matches(emailPattern.toRegex())){
+                    email.setBackgroundResource(R.drawable.erorrshape)
+                    Toast.makeText(this,"Invlide email adriss",Toast.LENGTH_SHORT).show()
 
                 }else if(pass.text.toString().trim().length<6){
                     Toast.makeText(this,"Low password  ",Toast.LENGTH_SHORT).show()
                     pass.setBackgroundResource(R.drawable.erorrshape)
-                }else if(!email.text.trim().matches(emailPattern.toRegex())){
-                    email.setBackgroundResource(R.drawable.erorrshape)
-                    Toast.makeText(this,"Invlide email adriss",Toast.LENGTH_SHORT).show()
                 }else if (pass.text.toString()!=cpass.text.toString()){
 
                     Toast.makeText(this,"The password not the same ",Toast.LENGTH_SHORT).show()
@@ -126,9 +110,7 @@ class Signup : AppCompatActivity() {
             }else{
 
                 login()
-                signup.visibility=View.GONE
-                verfy.visibility=View.VISIBLE
-                Ed_verify.visibility=View.VISIBLE
+
             }
 
 
@@ -160,9 +142,9 @@ class Signup : AppCompatActivity() {
                 storedVerificationId = verificationId
                 resendToken = token
                 Toast.makeText(this@Signup,"done",Toast.LENGTH_LONG).show()
-                // var intent = Intent(applicationContext,Verify::class.java)
-                //intent.putExtra("storedVerificationId",storedVerificationId)
-                // startActivity(intent)
+                 var intent = Intent(applicationContext,VerifyActivity::class.java)
+                intent.putExtra("storedVerificationId",storedVerificationId)
+                 startActivity(intent)
             }
         }
 
@@ -225,26 +207,6 @@ class Signup : AppCompatActivity() {
         PhoneAuthProvider.verifyPhoneNumber(options)
     }
 
-
-
-
-    //Verify
-    private fun signInWithPhoneAuthCredential(credential: PhoneAuthCredential) {
-        auth.signInWithCredential(credential)
-            .addOnCompleteListener(this) { task ->
-                if (task.isSuccessful) {
-                    startActivity(Intent(this, MainActivity2::class.java))
-                    finish()
-// ...
-                } else {
-// Sign in failed, display a message and update the UI
-                    if (task.exception is FirebaseAuthInvalidCredentialsException) {
-// The verification code entered was invalid
-                        Toast.makeText(this,"Invalid OTP",Toast.LENGTH_SHORT).show()
-                    }
-                }
-            }
-    }
 
 
 
