@@ -143,7 +143,7 @@ class Signup : AppCompatActivity() {
         callbacks = object : PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
 
             override fun onVerificationCompleted(credential: PhoneAuthCredential) {
-                startActivity(Intent(applicationContext, MainActivity::class.java))
+                startActivity(Intent(applicationContext, MainActivity2::class.java))
                 finish()
             }
 

@@ -26,21 +26,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
 
-
-         var tosignup:Button=findViewById(R.id.tosignup)
-         var tologin:Button=findViewById(R.id.tologin)
-
-        tosignup.setOnClickListener {
-            var i=Intent(this, Signup::class.java)
-            startActivity(i)
-        }
-        tologin.setOnClickListener {
-            var i=Intent(this, LoginActivity::class.java)
-            startActivity(i)
-        }
-
     }
-
 }
 
 

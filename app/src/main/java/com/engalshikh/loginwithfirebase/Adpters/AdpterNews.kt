@@ -1,4 +1,4 @@
-package com.engalshikh.loginwithfirebase
+package com.engalshikh.loginwithfirebase.Adpters
 
 import android.util.Log
 import android.view.LayoutInflater
@@ -6,6 +6,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.engalshikh.loginwithfirebase.Models.News
+import com.engalshikh.loginwithfirebase.R
 import com.firebase.ui.firestore.FirestoreRecyclerAdapter
 import com.firebase.ui.firestore.FirestoreRecyclerOptions
 

@@ -8,26 +8,7 @@
     android:orientation="vertical"
     tools:context=".MainActivity">
 
-    <Button
 
-        android:id="@+id/tologin"
-        android:layout_width="100dp"
-        android:layout_height="50dp"
-        android:layout_gravity="center"
-        android:text="signup">
-
-    </Button>
-
-    <Button
-
-        android:id="@+id/tosignup"
-        android:layout_width="100dp"
-        android:layout_height="50dp"
-        android:layout_gravity="center"
-        android:layout_weight="1"
-        android:text="signup">
-
-    </Button>
 
 
 </LinearLayout>

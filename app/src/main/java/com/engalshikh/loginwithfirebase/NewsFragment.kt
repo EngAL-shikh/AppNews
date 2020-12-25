@@ -13,6 +13,8 @@ import android.widget.Toast
 import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.engalshikh.loginwithfirebase.Adpters.AdpterNews
+import com.engalshikh.loginwithfirebase.Models.News
 import com.firebase.ui.firestore.FirestoreRecyclerOptions
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.firebase.auth.FirebaseAuth
@@ -27,7 +29,7 @@ class NewsFragment : Fragment() {
 
     private   var collectionRefrence: CollectionReference =db.collection("News")
     private   var collectionRefrenceSport: CollectionReference =db.collection("SportNews")
-    var adpterNews:AdpterNews?=null
+    var adpterNews: AdpterNews?=null
     lateinit var title: EditText
     lateinit var det: EditText
     lateinit var image: EditText
@@ -151,7 +153,7 @@ class NewsFragment : Fragment() {
 
 
 
-        var news=News(title.text.toString(),det.text.toString(),image.text.toString())
+        var news= News(title.text.toString(),det.text.toString(),image.text.toString())
         db.collection(typeNews).add(news).addOnCompleteListener{
             if (it.isSuccessful){
                 Toast.makeText(context,"added", Toast.LENGTH_LONG).show()
@@ -171,11 +173,11 @@ class NewsFragment : Fragment() {
 //
         val query: Query =collectionRefrence
         val firestoreRecyclerOptions= FirestoreRecyclerOptions.Builder<News>()
-            .setQuery(query,News::class.java)
+            .setQuery(query, News::class.java)
             .build()
 
 
-        adpterNews=AdpterNews(firestoreRecyclerOptions)
+        adpterNews= AdpterNews(firestoreRecyclerOptions)
         rec.layoutManager= LinearLayoutManager(context)
         rec.adapter=adpterNews
         Log.d("adpternews",adpterNews.toString())
@@ -192,11 +194,11 @@ class NewsFragment : Fragment() {
 
         val query: Query =collectionRefrenceSport
         val firestoreRecyclerOptions= FirestoreRecyclerOptions.Builder<News>()
-            .setQuery(query,News::class.java)
+            .setQuery(query, News::class.java)
             .build()
 
 
-        adpterNews=AdpterNews(firestoreRecyclerOptions)
+        adpterNews= AdpterNews(firestoreRecyclerOptions)
         rec.layoutManager= LinearLayoutManager(context)
         rec.adapter=adpterNews
         Log.d("adpternews",adpterNews.toString())
