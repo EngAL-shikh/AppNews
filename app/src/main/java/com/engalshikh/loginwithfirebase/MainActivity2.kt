@@ -66,7 +66,9 @@ class MainActivity2 : AppCompatActivity(), NavigationView.OnNavigationItemSelect
             R.id.nav_logout-> {
 
                 sendcontact("logout")
-            }else-> sendcontact("News")
+            }
+
+            else->sendcontact("News")
 
         }
         drawerLayout.closeDrawer(GravityCompat.START)

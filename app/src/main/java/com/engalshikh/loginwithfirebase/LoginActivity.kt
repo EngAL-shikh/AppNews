@@ -140,7 +140,8 @@ class LoginActivity : AppCompatActivity() {
             }
 
             override fun onVerificationFailed(e: FirebaseException) {
-                Toast.makeText(applicationContext, "Failed", Toast.LENGTH_LONG).show()
+               // Toast.makeText(applicationContext, "Failed", Toast.LENGTH_LONG).show()
+                Toast.makeText(applicationContext,e.toString(), Toast.LENGTH_LONG).show()
             }
 
             override fun onCodeSent(

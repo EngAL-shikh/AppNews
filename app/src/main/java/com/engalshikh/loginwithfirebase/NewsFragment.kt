@@ -7,7 +7,6 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ArrayAdapter
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
@@ -25,7 +24,7 @@ import com.google.firebase.firestore.Query
 class NewsFragment : Fragment() {
 
     private var db:FirebaseFirestore= FirebaseFirestore.getInstance()
-    private  lateinit var card_news: CardView
+
     private   var collectionRefrence: CollectionReference =db.collection("News")
     private   var collectionRefrenceSport: CollectionReference =db.collection("SportNews")
     var adpterNews:AdpterNews?=null
@@ -36,8 +35,8 @@ class NewsFragment : Fragment() {
     lateinit var rec: RecyclerView
     lateinit var add: FloatingActionButton
     lateinit var card_add: CardView
-    lateinit var arrayAdapter:ArrayAdapter<String>
-    //private lateinit var adapter: NewsAdapter
+
+
 
     companion object{
         fun newInstance(data:String):NewsFragment{
@@ -54,6 +53,8 @@ class NewsFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         contact=arguments?.getSerializable("name")as String
+
+
     }
 
     override fun onCreateView(
@@ -78,9 +79,9 @@ class NewsFragment : Fragment() {
         }
            save.setOnClickListener {
                    if (title.text.toString().trim().length<3){
-                   Toast.makeText(context,"Enter the title", Toast.LENGTH_LONG).show()
+                   Toast.makeText(context,"Small title, try again", Toast.LENGTH_LONG).show()
                }else if(det.text.toString().trim().length<12){
-                   Toast.makeText(context,"the deatils is very short", Toast.LENGTH_LONG).show()
+                   Toast.makeText(context,"Description Too Little Try again", Toast.LENGTH_LONG).show()
 
                }else{
                        if (contact=="News"){
@@ -117,32 +118,25 @@ class NewsFragment : Fragment() {
 
     }
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-
-
-        var cats=ArrayList<String>()
-
-        cats.add("الكترونيات")
-        cats.add("مستندات")
-        cats.add("اشخاص")
-        cats.add("حيوانات")
-
-
-        if (contact=="logout"){
-
-            var auth = FirebaseAuth.getInstance()
-            auth.signOut()
-            var i =Intent(context,LoginActivity::class.java)
-            startActivity(i)
-            activity?.finish()
-
-        }else if(contact=="sport"){
-            feachSportNews()
+   if(contact=="sport"){
+           feachSportNews()
 
         }else if(contact=="News"){
 
         feachNews()
 
-        }
+        }else{
+
+
+
+           var auth = FirebaseAuth.getInstance()
+               auth?.signOut()
+               var i =Intent(context,LoginActivity::class.java)
+               startActivity(i)
+               activity?.finish()
+
+
+   }
     }
 
 
@@ -213,24 +207,24 @@ class NewsFragment : Fragment() {
     }
 
     override fun onStart() {
-                super.onStart()
-        adpterNews!!.startListening()
+        super.onStart()
+        if(contact=="logout"){
+
+    }else{
+            adpterNews!!.startListening()
+        }
     }
 
     override fun onDestroy() {
         super.onDestroy()
-        adpterNews!!.stopListening()
+        if(contact=="logout"){
 
+        }else{
+            adpterNews!!.stopListening()
+        }
     }
 
-    fun getType(){
 
-
-
-
-
-
-    }
 //    fun redFromFireStore(){
 //        db= FirebaseFirestore.getInstance()
 //        val newsList = mutableListOf<News>();

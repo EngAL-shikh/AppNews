@@ -7,6 +7,43 @@
   "client": [
     {
       "client_info": {
+        "mobilesdk_app_id": "1:57687953835:android:3361a352369201630e82ee",
+        "android_client_info": {
+          "package_name": "com.amroz.firestore"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "57687953835-lba0m97l568s6ceq6e41uqo1j9l12ufl.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.amroz.firestore",
+            "certificate_hash": "3139133b07d7215e5433b83ce18e9b2ee9262330"
+          }
+        },
+        {
+          "client_id": "57687953835-5i1su1p7sbjjgrto356dv0a4vho7l1a5.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC2R3VIHSEiXlZhvpdxcAqRldAG2GyP7go"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "57687953835-5i1su1p7sbjjgrto356dv0a4vho7l1a5.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
         "mobilesdk_app_id": "1:57687953835:android:55d0787632ac312c0e82ee",
         "android_client_info": {
           "package_name": "com.engalshikh.loginwithfirebase"
@@ -14,7 +51,7 @@
       },
       "oauth_client": [
         {
-          "client_id": "57687953835-chth12vu7pq58n6eo1uuqge9u6lblr0i.apps.googleusercontent.com",
+          "client_id": "57687953835-rg57btuukmoqnf17ft0e0osqibc1331u.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.engalshikh.loginwithfirebase",

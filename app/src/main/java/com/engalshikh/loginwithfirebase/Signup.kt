@@ -79,6 +79,7 @@ class Signup : AppCompatActivity() {
                 signInWithPhoneAuthCredential(credential)
             }else{
                 Toast.makeText(this,"Enter OTP",Toast.LENGTH_SHORT).show()
+                Ed_verify.setBackgroundResource(R.drawable.erorrshape)
             }
 
             signup.visibility=View.VISIBLE
@@ -103,18 +104,20 @@ class Signup : AppCompatActivity() {
             if (Ed_verify.text.toString()==""){
                 if(uname.text.toString().trim().length<3){
                     Toast.makeText(this,"Name is Empty ",Toast.LENGTH_SHORT).show()
+                    uname.setBackgroundResource(R.drawable.erorrshape)
 
 
                 }else if(pass.text.toString().trim().length<6){
                     Toast.makeText(this,"Low password  ",Toast.LENGTH_SHORT).show()
-
+                    pass.setBackgroundResource(R.drawable.erorrshape)
                 }else if(!email.text.trim().matches(emailPattern.toRegex())){
-
+                    email.setBackgroundResource(R.drawable.erorrshape)
                     Toast.makeText(this,"Invlide email adriss",Toast.LENGTH_SHORT).show()
                 }else if (pass.text.toString()!=cpass.text.toString()){
 
                     Toast.makeText(this,"The password not the same ",Toast.LENGTH_SHORT).show()
-
+                    pass.setBackgroundResource(R.drawable.erorrshape)
+                    cpass.setBackgroundResource(R.drawable.erorrshape)
                 }else{
 
                     emailAuth()
